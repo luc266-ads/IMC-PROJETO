@@ -1,6 +1,7 @@
 package com.example.IMC.models;
 
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,8 +9,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table (name = "REGISTRO_IMC")
-public class DadosIMC implements Serializable {
+@Table (name = "REGISTROS_IMC")
+public class DadosIMC extends RepresentationModel<DadosIMC> implements Serializable {
     private static final long Serializable = 1L;
 
     @Id
@@ -18,10 +19,27 @@ public class DadosIMC implements Serializable {
     private UUID id;
     private String usuario;
     private String sexo;
-    private BigDecimal peso;
-    private BigDecimal altura;
+    private double peso;
+    private double Imc;
+    private double altura;
     private String classificacao;
     private LocalDateTime dataRegistro;
+
+
+    @PrePersist
+    protected void time() {
+        dataRegistro = LocalDateTime.now();
+    }
+
+
+
+    public double getImc() {
+        return Imc;
+    }
+
+    public void setImc(double imc) {
+        Imc = imc;
+    }
 
     public UUID getId() {
         return id;
@@ -47,19 +65,19 @@ public class DadosIMC implements Serializable {
         this.sexo = sexo;
     }
 
-    public BigDecimal getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(BigDecimal peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public BigDecimal getAltura() {
+    public double getAltura() {
         return altura;
     }
 
-    public void setAltura(BigDecimal altura) {
+    public void setAltura(double altura) {
         this.altura = altura;
     }
 
