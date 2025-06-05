@@ -23,9 +23,9 @@ public class ControllerImc {
 @Autowired
 RepositorioImc repositorioImc;
 
-    //COMANDO POST (INSENRI OS DADOS )
 
-    @PostMapping("/dbimc")
+    //COMANDO POST (INSENRI OS DADOS )
+@PostMapping("/dbimc")
     public ResponseEntity<Map<String, Object>> calcularImc(@RequestBody @Valid RecordImc recordImc) {
         // Calcula o IMC
         double imc = ServiceImc.calcularImc(recordImc.peso(), recordImc.altura());
@@ -52,6 +52,7 @@ RepositorioImc repositorioImc;
         // Retorna 201 CREATED com o corpo da resposta
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
 
 
 
